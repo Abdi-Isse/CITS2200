@@ -8,7 +8,7 @@ import CITS2200.Sort;
 * @author Tim French. 
 **/
 
-public class Sorter implements Sort
+public class lab1 implements Sort
 {
    private int count;
    
