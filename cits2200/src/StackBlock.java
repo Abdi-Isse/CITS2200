@@ -11,6 +11,12 @@ public class StackBlock implements Sort {
     }
 
 //  Checks to see if the stack is empty, otherwise returns false
+    public bboolean isEmpty()
+    {
+        return true;
+    }
+
+//  Checks to see if the stack is full, otherwise returns false
     public boolean isFull()
     {
         return true;
