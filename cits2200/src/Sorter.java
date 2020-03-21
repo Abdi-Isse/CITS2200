@@ -1,20 +1,12 @@
 import CITS2200.Sort;
 
-/**
-* A class to give a comparative view of common sorting algorithms.
-* The maintains a private static variable that counts the number 
-* of array assignments that are performed (as an approximate measure
-* of the complexity of the algorithm.
-* @author Tim French. 
-**/
-
 public class Sorter implements Sort
 {
    private int count;
    
    /**
 	* Returns the number of array assignment operations 
-	* performed by this class since the count variable was rest.
+	* performed by this class since the count variable was reset.
 	* @return the number of assignments
 	**/
 	public int getCount(){
