@@ -2,15 +2,20 @@ import CITS2200.Stack;
 import CITS2200.Underflow;
 import CITS2200.Overflow;
 
-public class StackBlock implements Sort {
+public class StackBlock implements Stack {
+
+    private int first;
+    private Object[] stack;
 
 /**
  * Create an empty stack of size @param
  * @param size
  */
-    public void stackBlock(int size)
+    public StackBlock(int size)
     {
-
+        if(size < 1) throw new IllegalArgumentException("Size can not be less than 1");
+        stack = new Object[size];
+        first = 0;
     }
 
 /**
@@ -19,7 +24,7 @@ public class StackBlock implements Sort {
  */
     public boolean isEmpty()
     {
-        return first == null;
+        return (first == 0);
     }
 
 /**
@@ -28,7 +33,7 @@ public class StackBlock implements Sort {
  */
     public boolean isFull()
     {
-        return true;
+        return (first >= stack.length);
     }
 
 /**
@@ -38,7 +43,9 @@ public class StackBlock implements Sort {
  */
     public void push(Object o) throws Overflow
     {
-        first = new Link(0, first);
+        if(isFull()) throw new Overflow("Stack is full");
+        stack[first] = o;
+        first++;
     }
 
 /**
@@ -48,8 +55,8 @@ public class StackBlock implements Sort {
  */
     public Object examine() throws Underflow
     {
-        if(!isEmpty()) return first.item;
-        else throw new Underflow("examining empty list");
+        if(!isEmpty()) return stack[first - 1];
+        else throw new Underflow("Examining empty list");
     }
 
 /**
@@ -61,9 +68,10 @@ public class StackBlock implements Sort {
  */
     public Object pop() throws Underflow
     {
-        top = first;
-        if(!isEmpty()) first = first.successor;
-        else throw new Underflow("deleting from empty list");
-        return top;
+        if(!isEmpty()) {
+            first--;
+            return stack[first];
+        }
+        else throw new Underflow("Stack is empty");
     }
 }
