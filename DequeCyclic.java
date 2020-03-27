@@ -38,20 +38,22 @@ public class DequeCyclic implements Deque {
     }
 
     public Object peekRight() throws Underflow{
-        if(isFull()) throw new Underflow("deque is full");
+        if(isFull()) throw new Underflow("deque is empty");
         return deque[last];
     }
 
     public Object popLeft() throws Underflow{
         if(isEmpty()) throw new Underflow("deque is empty");
+        Object a = deque[first];
         first--;
-        return deque[first];
+        return a;
     }
 
     public Object popRight() throws Underflow{
         if(isFull()) throw new Underflow("deque is empty");
-        last--;
-        return deque[last];
+        Object a = deque[last];
+        last++;
+        return a;
     }
 
 
