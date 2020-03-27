@@ -21,7 +21,7 @@ public class DequeCyclic implements Deque {
     }
 
     public void pushLeft(Object c) throws Overflow{
-        if(isEmpty()) throw new Overflow("deque is empty");
+        if(isFull()) throw new Overflow("deque is full");
         deque[first] = c;
         first++;
     }
