@@ -3,12 +3,12 @@ import CITS2200.Deque;
 
 public class DequeCyclic implements Deque {
 
-    private int first, last, numberOfItems;
+    private int left, right,numberOfItems;
     private Object[] queue;
     private int size;
 
     public DequeCyclic (int s) {
-        first = last = size = 0;
+        left = right = size = 0;
         queue = new Object[s];
         numberOfItems = s;
     }
@@ -23,10 +23,10 @@ public class DequeCyclic implements Deque {
 
     public void pushLeft(Object c) throws Overflow{
         if(isFull()) throw new Overflow("queue is full");
-        else if(first == 0 && last == 0 && size == 0) queue[0] = c;
+        else if(right == 0 && left == 0 && size == 0) queue[0] = c;
         else {
-            last = (last + 1) % queue.length;
-            queue[last] = c;
+            left = (left + 1) % queue.length;
+            queue[left] = c;
         }
         size++;
     }
@@ -35,53 +35,53 @@ public class DequeCyclic implements Deque {
 
     public void pushRight(Object c) throws Overflow{
         if(isFull()) throw new Overflow("queue is full");
-        else if(first == 0 && last == 0 && size == 0) queue[0] = c;
-        else if(first == 0) {
-            first = queue.length - 1;
-            queue[first] = c;
+        else if(left == 0 && right == 0 && size == 0) queue[0] = c;
+        else if(right == 0) {
+            right = queue.length - 1;
+            queue[right] = c;
         }
         else {
-            first--;
-            queue[first] = c;
+            right--;
+            queue[right] = c;
         }
         size++;
     }
 
     public Object peekLeft() throws Underflow{
         if(isEmpty()) throw new Underflow("queue is empty");
-        return queue[first];
+        return queue[left];
     }
 
     public Object peekRight() throws Underflow{
         if(isFull()) throw new Underflow("queue is empty");
-        return queue[last];
+        return queue[right];
     }
 
     public Object popLeft() throws Underflow{
-        Object a = queue[last];
+        Object a = queue[left];
         if(isEmpty()) throw new Underflow("queue is empty");
-        else if(last == 0) last = numberOfItems-1;
+        else if(left == 0) left = numberOfItems-1;
         else {
-            queue[last] = null;
-            last--;
+            queue[left] = null;
+            left--;
         }
         size--;
         return a;
     }
 
     public Object popRight() throws Underflow{
-        Object a = queue[first];
+        Object a = queue[right];
         if(isEmpty()) throw new Underflow("queue is empty");
         else {
-            queue[first] = null;
-            if(first == numberOfItems - 1) {
-                first = 0;
+            queue[right] = null;
+            if(right == numberOfItems - 1) {
+                right = 0;
             }
             else {
-                first++;
+                right++;
             }
         }
-        last--;
+        right--;
         return a;
     }
     
