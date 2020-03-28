@@ -53,7 +53,7 @@ public class DequeCyclic implements Deque {
     }
 
     public Object peekRight() throws Underflow{
-        if(isFull()) throw new Underflow("queue is empty");
+        if(isEmpty()) throw new Underflow("queue is empty");
         return queue[right];
     }
 
@@ -81,7 +81,7 @@ public class DequeCyclic implements Deque {
                 right++;
             }
         }
-        right--;
+        size--;
         return a;
     }
     
